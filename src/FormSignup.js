@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import './App.css'
+import { useNavigate } from "react-router-dom";
+import "./App.css";
 
 const FormSignup = () => {
   let navigate = useNavigate();
@@ -16,7 +16,7 @@ const FormSignup = () => {
     usernameError: "",
     emailError: "",
     passwordError: "",
-    Password2Error: ""
+    Password2Error: "",
   });
 
   const handleChange = (e) => {
@@ -28,58 +28,57 @@ const FormSignup = () => {
   };
 
   const validate = () => {
-    let usernameError = ""
-    let emailError = ""
-    let passwordError = ""
-    let password2Error = ""
+    let usernameError = "";
+    let emailError = "";
+    let passwordError = "";
+    let password2Error = "";
 
-    if(!values.username){
-      usernameError="name cannot be blank"
+    if (!values.username) {
+      usernameError = "name cannot be blank";
     }
 
-    if(!values.email){
-      emailError="please enter email address"
-    }else if(!values.email.includes('@')){
-      emailError = "invalid email"
+    if (!values.email) {
+      emailError = "please enter email address";
+    } else if (!values.email.includes("@")) {
+      emailError = "invalid email";
     }
 
-    if(!values.password){
-      passwordError = "please enter password"
-    } else if (values.password.length < 8){
-      passwordError = "password length minimum 8 characters"
+    if (!values.password) {
+      passwordError = "please enter password";
+    } else if (values.password.length < 8) {
+      passwordError = "password length minimum 8 characters";
     }
 
-    if(!values.password2){
-      password2Error = "please confirm password"
-    } else if (values.password2 !== values.password){
-      password2Error = "passwords do not match"
+    if (!values.password2) {
+      password2Error = "please confirm password";
+    } else if (values.password2 !== values.password) {
+      password2Error = "passwords do not match";
     }
 
-    if(emailError || usernameError){
-      setErrors({emailError, usernameError})
+    if (emailError || usernameError) {
+      setErrors({ emailError, usernameError });
       return false;
     }
-    if(passwordError || password2Error){
-      setErrors({passwordError, password2Error})
+    if (passwordError || password2Error) {
+      setErrors({ passwordError, password2Error });
       return false;
     }
 
-    return true
-  }
-
+    return true;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validate()
-    if (isValid){
-      navigate('todolist')
+    const isValid = validate();
+    if (isValid) {
+      navigate("./todolist");
     }
   };
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
-        <h1 style={{color: 'orange'}}>Upload your tasks today</h1>
+        <h1 style={{ color: "orange" }}>Upload your tasks today</h1>
         <div className="form-inputs">
           <label htmlFor="username" className="form-label">
             Username
@@ -143,16 +142,20 @@ const FormSignup = () => {
               value={values.password2}
               onChange={handleChange}
             />
-             <div style={{ fontSize: 16, color: "red" }}>
+            <div style={{ fontSize: 16, color: "red" }}>
               {errors.password2Error}
             </div>
           </label>
         </div>
-        <button onSubmit={handleSubmit} className="form-input-btn" type="submit">
+        <button
+          onSubmit={handleSubmit}
+          className="form-input-btn"
+          type="submit"
+        >
           Sign in
         </button>
-       
       </form>
+      {/* <Outlet /> */}
     </div>
   );
 };
